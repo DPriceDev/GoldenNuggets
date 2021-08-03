@@ -38,10 +38,59 @@ android {
         kotlinCompilerExtensionVersion = Version.compose
     }
 
+    packagingOptions {
+        exclude("META-INF/DEPENDENCIES")
+        exclude("META-INF/AL2.0")
+        exclude("META-INF/LGPL2.1")
+    }
+
+    testBuildType = "espresso"
+
     buildTypes {
+        getByName("debug") {
+            isDebuggable = true
+            signingConfig = signingConfigs.getByName("debug")
+        }
+        create("espresso") {
+            isDebuggable = true
+            signingConfig = signingConfigs.getByName("debug")
+        }
         getByName("release") {
             isMinifyEnabled = false
+            isDebuggable = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+
+    flavorDimensions("env")
+    productFlavors {
+        create("local") {
+            dimension = "env"
+            applicationIdSuffix = ".local"
+            versionNameSuffix = "-local"
+        }
+        create("integration") {
+            dimension = "env"
+            applicationIdSuffix = ".int"
+            versionNameSuffix = "-int"
+        }
+        create("prod") {
+            dimension = "env"
+        }
+    }
+
+    androidComponents {
+        beforeVariants { variantBuilder ->
+            val flavourMap = variantBuilder.productFlavors.toMap()
+            when {
+                variantBuilder.buildType == "debug" && flavourMap.containsValue("prod") ||
+                        variantBuilder.buildType == "espresso" && flavourMap.containsValue("prod") ||
+                        variantBuilder.buildType == "espresso" && flavourMap.containsValue("integration") ||
+                        variantBuilder.buildType == "release" && flavourMap.containsValue("local") ||
+                        variantBuilder.buildType == "release" && flavourMap.containsValue("integration")
+                -> variantBuilder.enabled = false
+                else -> variantBuilder.enabled = true
+            }
         }
     }
 }
@@ -82,5 +131,6 @@ dependencies {
     /* UI Test Dependencies */
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation(Dependencies.Kotlin.test)
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${ Version.compose }")
 }
