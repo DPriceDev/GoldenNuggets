@@ -18,6 +18,7 @@ class BlockHasherImpl @Inject constructor() : BlockHasher {
             current + "%02x".format(it)
         }
 
+
     companion object {
         private const val SHA_256_ALGORITHM = "SHA-256"
     }

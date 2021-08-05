@@ -7,12 +7,15 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.dpricedev.crypto.goldennuggets.ui.theme.GoldenNuggetsTheme
 
 object MainScreenUi {
 
     @Composable
-    fun Layout() {
+    fun Layout(
+        viewModel: MainScreenViewModel = hiltViewModel<MainScreenViewModelImpl>()
+    ) {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
@@ -30,7 +33,9 @@ object MainScreenUi {
 @Preview
 @Composable
 private fun PreviewMainScreenLayout() {
+    val testViewModel = object: MainScreenViewModel { }
+
     GoldenNuggetsTheme {
-        MainScreenUi.Layout()
+        MainScreenUi.Layout(testViewModel)
     }
 }

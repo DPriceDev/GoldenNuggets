@@ -1,22 +1,26 @@
 package com.dpricedev.crypto.goldennuggets.blockchain
 
+import android.util.Log
+import com.dpricedev.crypto.goldennuggets.blockchain.model.Block
 import javax.inject.Inject
 
 interface BlockProofer {
     fun isValid(
-        lastProof: Int,
-        proposedProof: Int,
+        block: Block,
         difficulty: Int
     ) : Boolean
 }
 
-class BlockProoferImpl @Inject constructor() : BlockProofer {
+class BlockProoferImpl @Inject constructor(
+    private val blockHasher: BlockHasher
+) : BlockProofer {
 
     override fun isValid(
-        lastProof: Int,
-        proposedProof: Int,
+        block: Block,
         difficulty: Int
     ) : Boolean {
-        TODO("Not yet implemented")
+        return blockHasher.hashBlock(block)
+            .take(difficulty)
+            .all { it == '0' }
     }
 }
