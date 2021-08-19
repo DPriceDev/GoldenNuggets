@@ -39,6 +39,8 @@ android {
     }
 
     packagingOptions {
+        exclude("**/attach_hotspot_windows.dll")
+        exclude("META-INF/licenses/**")
         exclude("META-INF/DEPENDENCIES")
         exclude("META-INF/AL2.0")
         exclude("META-INF/LGPL2.1")
@@ -110,8 +112,7 @@ dependencies {
     implementation(Dependencies.Compose.animation)
     implementation("androidx.activity:activity-compose:1.3.0")
 
-    implementation(Dependencies.Compose.uiToolingPreview)
-    debugImplementation(Dependencies.Compose.uiTooling)
+    implementation(Dependencies.Compose.uiTooling)
 
     /* Hilt */
     implementation(Dependencies.Hilt.android)
@@ -123,14 +124,18 @@ dependencies {
     testImplementation(Dependencies.Junit.api)
     testImplementation(Dependencies.Junit.engine)
     testImplementation(Dependencies.Junit.parameterized)
-    testImplementation("org.mockito:mockito-core:3.11.2")
+    testImplementation(Dependencies.Mockito.core)
+    testImplementation(Dependencies.Mockito.kotlin)
     testImplementation(Dependencies.Kotlin.test)
     testImplementation(Dependencies.Kotlin.testJunit5)
     debugImplementation(Dependencies.Android.fragmentTesting)
+    testImplementation(Dependencies.Kotlin.coroutineTest)
 
     /* UI Test Dependencies */
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation(Dependencies.Kotlin.test)
+    androidTestImplementation(Dependencies.Mockito.core)
+    androidTestImplementation(Dependencies.Mockito.kotlin)
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${ Version.compose }")
 }

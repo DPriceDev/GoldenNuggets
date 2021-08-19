@@ -4,6 +4,7 @@ object Dependencies {
     object Kotlin {
         const val test = "org.jetbrains.kotlin:kotlin-test:${ Version.kotlin }"
         const val testJunit5 = "org.jetbrains.kotlin:kotlin-test-junit5:${ Version.kotlin }"
+        const val coroutineTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
     }
 
     object Android {
@@ -20,7 +21,7 @@ object Dependencies {
         const val ui = "androidx.compose.ui:ui:${ Version.compose }"
         const val material = "androidx.compose.material:material:${ Version.compose }"
         const val uiTooling = "androidx.compose.ui:ui-tooling:${ Version.compose }"
-        const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${ Version.compose }"
+        //const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${ Version.compose }"
         const val animation = "androidx.compose.animation:animation:${ Version.compose }"
         const val navigation = "androidx.navigation:navigation-compose:${ Version.composeNavigation }"
     }
@@ -46,6 +47,11 @@ object Dependencies {
         const val api = "org.junit.jupiter:junit-jupiter-api:${ Version.junit5 }"
         const val engine = "org.junit.jupiter:junit-jupiter-engine:${ Version.junit5 }"
         const val parameterized = "org.junit.jupiter:junit-jupiter-params:${ Version.junit5 }"
+    }
+
+    object Mockito {
+        const val core = "org.mockito:mockito-core:${ Version.mockito }"
+        const val kotlin = "org.mockito.kotlin:mockito-kotlin:3.2.0"
     }
 
     object Experimental {
