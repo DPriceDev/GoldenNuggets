@@ -1,6 +1,8 @@
 package com.dpricedev.crypto.goldennuggets.blockchain
 
 import com.dpricedev.crypto.goldennuggets.blockchain.model.Block
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.any
@@ -38,7 +40,8 @@ class BlockMinerTest {
 
     /* Tests */
     @Test
-    fun `test Block miner will mine for 12 cycles before finding and returning the block`() {
+    @ExperimentalCoroutinesApi
+    fun `test Block miner will mine for 12 cycles before finding and returning the block`() = runBlockingTest {
         val proofedBlock = sut.mineBlock(testBlock, TEST_DIFFICULTY)
         assertEquals(12, proofedBlock.proof)
     }

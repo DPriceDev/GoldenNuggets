@@ -4,6 +4,7 @@ object Dependencies {
     object Kotlin {
         const val test = "org.jetbrains.kotlin:kotlin-test:${ Version.kotlin }"
         const val testJunit5 = "org.jetbrains.kotlin:kotlin-test-junit5:${ Version.kotlin }"
+        const val coroutineTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
     }
 
     object Android {

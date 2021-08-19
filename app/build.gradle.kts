@@ -127,6 +127,7 @@ dependencies {
     testImplementation(Dependencies.Kotlin.test)
     testImplementation(Dependencies.Kotlin.testJunit5)
     debugImplementation(Dependencies.Android.fragmentTesting)
+    testImplementation(Dependencies.Kotlin.coroutineTest)
 
     /* UI Test Dependencies */
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
