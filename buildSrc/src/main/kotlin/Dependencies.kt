@@ -44,6 +44,17 @@ object Dependencies {
         const val ktx = "androidx.room:room-ktx:${ Version.room }"
     }
 
+    object Ktor {
+        const val ktor = "io.ktor:ktor:${ Version.ktor }"
+
+        object Server {
+
+            const val cioEngine = "io.ktor:ktor-server-cio:${ Version.ktor }"
+            const val serialization = "io.ktor:ktor-serialization:${ Version.ktor }"
+            const val logging = "ch.qos.logback:logback-classic:1.2.5"
+        }
+    }
+
     object Junit {
         const val api = "org.junit.jupiter:junit-jupiter-api:${ Version.junit5 }"
         const val engine = "org.junit.jupiter:junit-jupiter-engine:${ Version.junit5 }"

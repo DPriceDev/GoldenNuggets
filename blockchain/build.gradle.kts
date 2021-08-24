@@ -30,6 +30,8 @@ android {
         exclude("META-INF/DEPENDENCIES")
         exclude("META-INF/AL2.0")
         exclude("META-INF/LGPL2.1")
+        exclude("META-INF/INDEX.LIST")
+        exclude("META-INF/*")
     }
 
     buildTypes {
@@ -77,6 +79,12 @@ dependencies {
     implementation(Dependencies.Hilt.navigation)
     implementation(Dependencies.Hilt.navigationFragment)
     kapt(Dependencies.Hilt.androidCompiler)
+
+    /* Ktor */
+    implementation(Dependencies.Ktor.ktor)
+    implementation(Dependencies.Ktor.Server.cioEngine)
+    implementation(Dependencies.Ktor.Server.serialization)
+    implementation(Dependencies.Ktor.Server.logging)
 
     testImplementation(Dependencies.Junit.api)
     testImplementation(Dependencies.Junit.engine)

@@ -5,6 +5,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.dprice.crypto.goldennuggets.blockchain.server.BlockChainServer
+import dev.dprice.crypto.goldennuggets.blockchain.server.BlockChainServerImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -18,4 +20,7 @@ abstract class BlockChainModule {
 
     @Binds
     abstract fun BlockHasherImpl.bindBlockHasherImpl() : BlockHasher
+
+    @Binds
+    abstract fun BlockChainServerImpl.bindBlockChainServerImpl() : BlockChainServer
 }

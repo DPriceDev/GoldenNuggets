@@ -13,6 +13,7 @@ import dev.dprice.crypto.goldennuggets.blockchain.model.Transaction
 import com.dpricedev.crypto.goldennuggets.util.ForegroundNotificationHelper
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dev.dprice.crypto.goldennuggets.blockchain.server.BlockChainServer
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -34,6 +35,9 @@ class BlockChainService : Service() {
     @Inject
     lateinit var blockHasher: BlockHasher
 
+    @Inject
+    lateinit var blockChainServer: BlockChainServer
+
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -49,58 +53,60 @@ class BlockChainService : Service() {
 
         startForeground(NOTIFICATION_ID, notification)
 
-        mine()
+//        mine()
+
+        blockChainServer.startServer()
 
         return START_REDELIVER_INTENT
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
+        blockChainServer.stopServer()
     }
 
-    private fun mine() {
-        val transaction = Transaction(
-            "",
-            "",
-            25
-        )
-
-        var block = Block(
-            1,
-            0, // todo
-            listOf(
-                transaction
-            ),
-            0,
-            ""
-        )
-
-        val exceptionHandler = CoroutineExceptionHandler { context, ex ->
-            Log.e("Davids Log", "Cancelled!")
-        }
-
-        val test = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-            val myFlow = flow<Int> {
-                while (true) {
-                    val minedBlock = blockMiner.mineBlock(block, 2)
-
-                    block = minedBlock.copy(
-                        index = block.index+1,
-                        previousHash = blockHasher.hashBlock(minedBlock)
-                    )
-
-                    this.emit(minedBlock.proof)
-
-                    ensureActive()
-                }
-            }
-
-            myFlow.collect {
-                Log.e("David Log", "proof = $it")
-            }
-        }
-    }
+//    private fun mine() {
+//        val transaction = Transaction(
+//            "",
+//            "",
+//            25
+//        )
+//
+//        var block = Block(
+//            1,
+//            0, // todo
+//            listOf(
+//                transaction
+//            ),
+//            0,
+//            ""
+//        )
+//
+//        val exceptionHandler = CoroutineExceptionHandler { context, ex ->
+//            Log.e("Davids Log", "Cancelled!")
+//        }
+//
+//        val test = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+//            val myFlow = flow<Int> {
+//                while (true) {
+//                    val minedBlock = blockMiner.mineBlock(block, 2)
+//
+//                    block = minedBlock.copy(
+//                        index = block.index+1,
+//                        previousHash = blockHasher.hashBlock(minedBlock)
+//                    )
+//
+//                    this.emit(minedBlock.proof)
+//
+//                    ensureActive()
+//                }
+//            }
+//
+//            myFlow.collect {
+//                Log.e("David Log", "proof = $it")
+//            }
+//        }
+//    }
 
     companion object {
         private const val NOTIFICATION_ID = 123

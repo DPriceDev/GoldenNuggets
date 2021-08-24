@@ -10,9 +10,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.dpricedev.crypto.goldennuggets.ui.screen.MainScreenUi
 import com.dpricedev.crypto.goldennuggets.ui.theme.GoldenNuggetsTheme
 import dagger.hilt.android.AndroidEntryPoint
+import dev.dprice.crypto.goldennuggets.blockchain.server.BlockChainServer
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var blockChainServer: BlockChainServer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
