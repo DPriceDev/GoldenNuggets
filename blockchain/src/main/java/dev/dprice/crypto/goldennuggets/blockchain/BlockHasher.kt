@@ -1,7 +1,7 @@
-package com.dpricedev.crypto.goldennuggets.blockchain
+package dev.dprice.crypto.goldennuggets.blockchain
 
 import android.util.Base64
-import com.dpricedev.crypto.goldennuggets.blockchain.model.Block
+import dev.dprice.crypto.goldennuggets.blockchain.model.Block
 import java.security.MessageDigest
 import javax.inject.Inject
 

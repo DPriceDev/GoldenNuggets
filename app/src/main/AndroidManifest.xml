@@ -12,6 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GoldenNuggets">
+
+        <service
+            android:name=".main.BlockChainService"
+            android:exported="false"/>
+
         <activity
             android:name=".main.MainActivity"
             android:exported="true"

@@ -1,6 +1,6 @@
-package com.dpricedev.crypto.goldennuggets.blockchain.di
+package dev.dprice.crypto.goldennuggets.blockchain.di
 
-import com.dpricedev.crypto.goldennuggets.blockchain.*
+import dev.dprice.crypto.goldennuggets.blockchain.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

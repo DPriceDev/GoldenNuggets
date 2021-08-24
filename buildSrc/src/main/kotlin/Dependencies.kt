@@ -13,6 +13,7 @@ object Dependencies {
         const val runtimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:${ Version.fragmentKtx }"
         const val fragmentTesting = "androidx.fragment:fragment-testing:${ Version.fragmentKtx }"
+        const val workerKtx = "androidx.work:work-runtime-ktx:2.7.0-alpha05"
 
         const val material = "com.google.android.material:material:1.4.0"
     }
