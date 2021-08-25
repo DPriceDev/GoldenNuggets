@@ -13,7 +13,16 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 interface ForegroundNotificationHelper {
-    fun getNotification(notificationIntent: PendingIntent) : Notification
+    fun getNotification(
+        notificationIntent: PendingIntent,
+        message: String
+    ) : Notification
+
+    fun updateNotificationMessage(
+        id: Int,
+        notificationIntent: PendingIntent,
+        message: String
+    )
 }
 
 class ForegroundNotificationHelperImpl @Inject constructor(
@@ -21,9 +30,12 @@ class ForegroundNotificationHelperImpl @Inject constructor(
     private val notificationManager: NotificationManager
 ) : ForegroundNotificationHelper {
 
-    override fun getNotification(notificationIntent: PendingIntent): Notification {
+    override fun getNotification(
+        notificationIntent: PendingIntent,
+        message: String
+    ): Notification {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setContentTitle(context.getString(R.string.app_name))
+            .setContentTitle(message)
             .setSound(null)
             .setContentIntent(notificationIntent)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -34,6 +46,19 @@ class ForegroundNotificationHelperImpl @Inject constructor(
         }
 
         return builder.build()
+    }
+
+    override fun updateNotificationMessage(
+        id: Int,
+        notificationIntent: PendingIntent,
+        message: String
+    ) {
+
+        val notification = getNotification(
+            notificationIntent,
+            message
+        )
+        notificationManager.notify(id, notification)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

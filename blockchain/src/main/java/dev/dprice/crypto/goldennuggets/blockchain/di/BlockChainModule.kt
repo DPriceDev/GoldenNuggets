@@ -7,6 +7,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.dprice.crypto.goldennuggets.blockchain.server.BlockChainServer
 import dev.dprice.crypto.goldennuggets.blockchain.server.BlockChainServerImpl
+import dev.dprice.crypto.goldennuggets.blockchain.usecase.MineUseCase
+import dev.dprice.crypto.goldennuggets.blockchain.usecase.MineUseCaseImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -23,4 +25,7 @@ abstract class BlockChainModule {
 
     @Binds
     abstract fun BlockChainServerImpl.bindBlockChainServerImpl() : BlockChainServer
+
+    @Binds
+    abstract fun MineUseCaseImpl.bindMineUseCaseImpl() : MineUseCase
 }

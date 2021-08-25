@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 import dev.dprice.crypto.goldennuggets.blockchain.BlockHasher
@@ -14,6 +15,7 @@ import com.dpricedev.crypto.goldennuggets.util.ForegroundNotificationHelper
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.dprice.crypto.goldennuggets.blockchain.server.BlockChainServer
+import dev.dprice.crypto.goldennuggets.blockchain.usecase.MineUseCase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -21,6 +23,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class BlockChainService : Service() {
+
+    inner class BlockChainBinder : Binder() {
+        fun getService() : BlockChainService {
+            return this@BlockChainService
+        }
+    }
 
     @Inject
     @ApplicationContext
@@ -30,30 +38,34 @@ class BlockChainService : Service() {
     lateinit var foregroundNotificationHelper: ForegroundNotificationHelper
 
     @Inject
-    lateinit var blockMiner: BlockMiner
-
-    @Inject
-    lateinit var blockHasher: BlockHasher
-
-    @Inject
     lateinit var blockChainServer: BlockChainServer
 
-    override fun onBind(intent: Intent?): IBinder? = null
+    @Inject
+    lateinit var mineUseCase: MineUseCase
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    private val blockChainBinder: IBinder = BlockChainBinder()
 
-        val pendingIntent = PendingIntent.getActivity(
+    private val pendingIntent by lazy {
+        PendingIntent.getActivity(
             context,
             0,
             Intent(context, MainActivity::class.java),
             PendingIntent.FLAG_UPDATE_CURRENT
         )
+    }
 
-        val notification = foregroundNotificationHelper.getNotification(pendingIntent)
+    private var miningJob: Job? = null
+
+    override fun onBind(intent: Intent?): IBinder = blockChainBinder
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+        val notification = foregroundNotificationHelper.getNotification(
+            pendingIntent,
+            "Service Started"
+        )
 
         startForeground(NOTIFICATION_ID, notification)
-
-//        mine()
 
         blockChainServer.startServer()
 
@@ -65,48 +77,24 @@ class BlockChainService : Service() {
         blockChainServer.stopServer()
     }
 
-//    private fun mine() {
-//        val transaction = Transaction(
-//            "",
-//            "",
-//            25
-//        )
-//
-//        var block = Block(
-//            1,
-//            0, // todo
-//            listOf(
-//                transaction
-//            ),
-//            0,
-//            ""
-//        )
-//
-//        val exceptionHandler = CoroutineExceptionHandler { context, ex ->
-//            Log.e("Davids Log", "Cancelled!")
-//        }
-//
-//        val test = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-//            val myFlow = flow<Int> {
-//                while (true) {
-//                    val minedBlock = blockMiner.mineBlock(block, 2)
-//
-//                    block = minedBlock.copy(
-//                        index = block.index+1,
-//                        previousHash = blockHasher.hashBlock(minedBlock)
-//                    )
-//
-//                    this.emit(minedBlock.proof)
-//
-//                    ensureActive()
-//                }
-//            }
-//
-//            myFlow.collect {
-//                Log.e("David Log", "proof = $it")
-//            }
-//        }
-//    }
+    fun startMining() {
+        foregroundNotificationHelper.updateNotificationMessage(
+            NOTIFICATION_ID,
+            pendingIntent,
+            "Mining!"
+        )
+        miningJob = mineUseCase.mine()
+    }
+
+    fun stopMining() {
+        foregroundNotificationHelper.updateNotificationMessage(
+            NOTIFICATION_ID,
+            pendingIntent,
+            "Not Mining!"
+        )
+        miningJob?.cancel()
+        miningJob = null
+    }
 
     companion object {
         private const val NOTIFICATION_ID = 123
