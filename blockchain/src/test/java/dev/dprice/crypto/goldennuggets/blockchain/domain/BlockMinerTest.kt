@@ -1,4 +1,4 @@
-package com.dpricedev.crypto.goldennuggets.blockchain
+package dev.dprice.crypto.goldennuggets.blockchain.domain
 
 import dev.dprice.crypto.goldennuggets.blockchain.model.Block
 import kotlinx.coroutines.ExperimentalCoroutinesApi

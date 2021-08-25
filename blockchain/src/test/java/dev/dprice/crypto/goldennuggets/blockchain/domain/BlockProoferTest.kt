@@ -1,13 +1,10 @@
-package com.dpricedev.crypto.goldennuggets.blockchain
+package dev.dprice.crypto.goldennuggets.blockchain.domain
 
 import dev.dprice.crypto.goldennuggets.blockchain.model.Block
-import dev.dprice.crypto.goldennuggets.blockchain.model.Transaction
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
