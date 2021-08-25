@@ -10,6 +10,8 @@ buildscript {
         classpath("de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
         classpath(Dependencies.Hilt.gradlePlugin)
+        classpath("com.squareup.sqldelight:gradle-plugin:1.5.0")
+        classpath(kotlin("serialization", version = Version.kotlin))
     }
 }
 

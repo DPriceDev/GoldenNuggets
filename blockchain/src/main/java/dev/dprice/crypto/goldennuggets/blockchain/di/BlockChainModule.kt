@@ -16,6 +16,9 @@ import dev.dprice.crypto.goldennuggets.blockchain.usecase.*
 abstract class BlockChainModule {
 
     @Binds
+    abstract fun BlockChainRepositoryImpl.bindBlockChainRepositoryImpl() : BlockChainRepository
+
+    @Binds
     abstract fun BlockMinerImpl.bindBlockMinerImpl() : BlockMiner
 
     @Binds

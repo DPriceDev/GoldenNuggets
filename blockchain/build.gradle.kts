@@ -1,9 +1,11 @@
 plugins {
     id("com.android.library")
     id("dagger.hilt.android.plugin")
+    id("com.squareup.sqldelight")
     id("de.mannodermaus.android-junit5")
     kotlin("android")
     kotlin("kapt")
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -86,8 +88,13 @@ dependencies {
     implementation(Dependencies.Ktor.Server.serialization)
     implementation(Dependencies.Ktor.Server.logging)
 
+    /* SQL Delight */
+    implementation("com.squareup.sqldelight:android-driver:1.5.0")
+    implementation("com.squareup.sqldelight:coroutines-extensions-jvm:1.5.0")
+
     /* Kotlin */
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
     testImplementation(Dependencies.Junit.api)
     testImplementation(Dependencies.Junit.engine)

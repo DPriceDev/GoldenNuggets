@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.squareup.sqldelight")
     id("dagger.hilt.android.plugin")
     id("de.mannodermaus.android-junit5")
     kotlin("android")
