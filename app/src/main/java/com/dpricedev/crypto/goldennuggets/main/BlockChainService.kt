@@ -6,19 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
-import android.util.Log
-import dev.dprice.crypto.goldennuggets.blockchain.BlockHasher
-import dev.dprice.crypto.goldennuggets.blockchain.BlockMiner
-import dev.dprice.crypto.goldennuggets.blockchain.model.Block
-import dev.dprice.crypto.goldennuggets.blockchain.model.Transaction
 import com.dpricedev.crypto.goldennuggets.util.ForegroundNotificationHelper
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dev.dprice.crypto.goldennuggets.blockchain.server.BlockChainServer
-import dev.dprice.crypto.goldennuggets.blockchain.usecase.MineUseCase
+import dev.dprice.crypto.goldennuggets.blockchain.BlockChainServer
+import dev.dprice.crypto.goldennuggets.blockchain.BlockChainMiner
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -41,7 +34,7 @@ class BlockChainService : Service() {
     lateinit var blockChainServer: BlockChainServer
 
     @Inject
-    lateinit var mineUseCase: MineUseCase
+    lateinit var blockChainMiner: BlockChainMiner
 
     private val blockChainBinder: IBinder = BlockChainBinder()
 
@@ -83,7 +76,7 @@ class BlockChainService : Service() {
             pendingIntent,
             "Mining!"
         )
-        miningJob = mineUseCase.mine()
+        miningJob = blockChainMiner.mine()
     }
 
     fun stopMining() {

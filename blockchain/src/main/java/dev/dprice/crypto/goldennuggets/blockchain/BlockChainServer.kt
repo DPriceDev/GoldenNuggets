@@ -1,4 +1,4 @@
-package dev.dprice.crypto.goldennuggets.blockchain.server
+package dev.dprice.crypto.goldennuggets.blockchain
 
 import io.ktor.application.*
 import io.ktor.features.*
