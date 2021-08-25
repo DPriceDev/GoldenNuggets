@@ -1,4 +1,4 @@
-package com.dpricedev.crypto.goldennuggets.blockchain
+package dev.dprice.crypto.goldennuggets.blockchain.domain
 
 import javax.inject.Inject
 

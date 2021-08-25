@@ -1,7 +1,7 @@
-package com.dpricedev.crypto.goldennuggets.blockchain
+package dev.dprice.crypto.goldennuggets.blockchain.domain
 
-import com.dpricedev.crypto.goldennuggets.blockchain.model.Block
-import com.dpricedev.crypto.goldennuggets.blockchain.model.Transaction
+import dev.dprice.crypto.goldennuggets.blockchain.model.Block
+import dev.dprice.crypto.goldennuggets.blockchain.model.Transaction
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals

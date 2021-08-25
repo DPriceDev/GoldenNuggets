@@ -1,8 +1,9 @@
-package com.dpricedev.crypto.goldennuggets.blockchain
+package dev.dprice.crypto.goldennuggets.blockchain.usecase
 
-import com.dpricedev.crypto.goldennuggets.blockchain.model.Block
-import com.dpricedev.crypto.goldennuggets.blockchain.model.BlockChain
-import com.dpricedev.crypto.goldennuggets.blockchain.model.Transaction
+import dev.dprice.crypto.goldennuggets.blockchain.domain.BlockHasher
+import dev.dprice.crypto.goldennuggets.blockchain.model.Block
+import dev.dprice.crypto.goldennuggets.blockchain.model.BlockChain
+import dev.dprice.crypto.goldennuggets.blockchain.model.Transaction
 import javax.inject.Inject
 
 interface BlockChainInteractor {

@@ -1,4 +1,4 @@
-package com.dpricedev.crypto.goldennuggets.blockchain.model
+package dev.dprice.crypto.goldennuggets.blockchain.model
 
 data class Block(
     val index: Int,

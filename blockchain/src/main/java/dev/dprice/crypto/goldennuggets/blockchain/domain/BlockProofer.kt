@@ -1,7 +1,6 @@
-package com.dpricedev.crypto.goldennuggets.blockchain
+package dev.dprice.crypto.goldennuggets.blockchain.domain
 
-import android.util.Log
-import com.dpricedev.crypto.goldennuggets.blockchain.model.Block
+import dev.dprice.crypto.goldennuggets.blockchain.model.Block
 import javax.inject.Inject
 
 interface BlockProofer {

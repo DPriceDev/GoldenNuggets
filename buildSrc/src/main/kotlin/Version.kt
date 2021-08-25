@@ -14,6 +14,8 @@ object Version {
 
     const val room = "2.4.0-alpha03"
 
+    const val ktor = "1.6.2"
+
     const val junit4 = ""
     const val junit5 = "5.7.1"
 

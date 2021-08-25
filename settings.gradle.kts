@@ -21,3 +21,4 @@ pluginManagement {
 
 rootProject.name = "GoldenNuggets"
 include(":app")
+include(":blockchain")

@@ -1,6 +1,6 @@
-package com.dpricedev.crypto.goldennuggets.blockchain
+package dev.dprice.crypto.goldennuggets.blockchain.domain
 
-import com.dpricedev.crypto.goldennuggets.blockchain.model.Block
+import dev.dprice.crypto.goldennuggets.blockchain.model.Block
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.BeforeEach

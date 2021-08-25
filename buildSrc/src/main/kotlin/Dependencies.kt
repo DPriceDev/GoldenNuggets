@@ -13,6 +13,7 @@ object Dependencies {
         const val runtimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:${ Version.fragmentKtx }"
         const val fragmentTesting = "androidx.fragment:fragment-testing:${ Version.fragmentKtx }"
+        const val workerKtx = "androidx.work:work-runtime-ktx:2.7.0-alpha05"
 
         const val material = "com.google.android.material:material:1.4.0"
     }
@@ -41,6 +42,17 @@ object Dependencies {
         const val runtime = "androidx.room:room-runtime:${ Version.room }"
         const val compiler = "androidx.room:room-compiler:${ Version.room }"
         const val ktx = "androidx.room:room-ktx:${ Version.room }"
+    }
+
+    object Ktor {
+        const val ktor = "io.ktor:ktor:${ Version.ktor }"
+
+        object Server {
+
+            const val cioEngine = "io.ktor:ktor-server-cio:${ Version.ktor }"
+            const val serialization = "io.ktor:ktor-serialization:${ Version.ktor }"
+            const val logging = "ch.qos.logback:logback-classic:1.2.5"
+        }
     }
 
     object Junit {

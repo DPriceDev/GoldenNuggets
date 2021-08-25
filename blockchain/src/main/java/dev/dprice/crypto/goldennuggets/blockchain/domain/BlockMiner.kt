@@ -1,8 +1,7 @@
-package com.dpricedev.crypto.goldennuggets.blockchain
+package dev.dprice.crypto.goldennuggets.blockchain.domain
 
-import com.dpricedev.crypto.goldennuggets.blockchain.model.Block
+import dev.dprice.crypto.goldennuggets.blockchain.model.Block
 import kotlinx.coroutines.ensureActive
-import kotlinx.coroutines.isActive
 import javax.inject.Inject
 import kotlin.coroutines.coroutineContext
 
