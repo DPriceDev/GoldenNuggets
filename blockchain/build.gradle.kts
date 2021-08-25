@@ -86,6 +86,9 @@ dependencies {
     implementation(Dependencies.Ktor.Server.serialization)
     implementation(Dependencies.Ktor.Server.logging)
 
+    /* Kotlin */
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+
     testImplementation(Dependencies.Junit.api)
     testImplementation(Dependencies.Junit.engine)
     testImplementation(Dependencies.Junit.parameterized)

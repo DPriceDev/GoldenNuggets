@@ -1,7 +1,10 @@
 package dev.dprice.crypto.goldennuggets.blockchain.usecase
 
+import dev.dprice.crypto.goldennuggets.blockchain.model.Block
 import dev.dprice.crypto.goldennuggets.blockchain.model.BlockChain
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.datetime.Clock
 import javax.inject.Inject
 
 interface GetBlockChainUseCase {
@@ -20,6 +23,21 @@ class GetBlockChainUseCaseImpl @Inject constructor() : GetBlockChainUseCase {
 
         // return flow of blockchain from repo
 
-        TODO()
+        return flow {
+            emit(
+                BlockChain(
+                    listOf(
+                        Block(
+                            0,
+                            Clock.System.now().toEpochMilliseconds(),
+                            listOf(),
+                            0,
+                            ""
+                        )
+                    ),
+                    listOf()
+                )
+            )
+        }
     }
 }
