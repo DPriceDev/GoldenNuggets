@@ -1,0 +1,20 @@
+import dev.dprice.crypto.goldennuggets.blockchain.model.Block;
+import dev.dprice.crypto.goldennuggets.blockchain.model.Transaction;
+import kotlin.collections.List;
+
+CREATE TABLE BlockChainItem (
+    id INTEGER NOT NULL,
+    blocks TEXT AS List<Block> NOT NULL,
+    transactions TEXT AS List<Transaction> NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE INDEX BlockChain_Id ON BlockChainItem(id);
+
+selectAll:
+SELECT *
+FROM BlockChainItem;
+
+addBlockChain:
+INSERT OR REPLACE INTO BlockChainItem(id, blocks, transactions)
+VALUES (?, ?, ?);

@@ -2,6 +2,10 @@
 object Dependencies {
 
     object Kotlin {
+
+        const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.2.1"
+        const val jsonSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
+
         const val test = "org.jetbrains.kotlin:kotlin-test:${ Version.kotlin }"
         const val testJunit5 = "org.jetbrains.kotlin:kotlin-test-junit5:${ Version.kotlin }"
         const val coroutineTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
@@ -38,10 +42,9 @@ object Dependencies {
         const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${ Version.hilt }"
     }
 
-    object Room {
-        const val runtime = "androidx.room:room-runtime:${ Version.room }"
-        const val compiler = "androidx.room:room-compiler:${ Version.room }"
-        const val ktx = "androidx.room:room-ktx:${ Version.room }"
+    object SqlDelight {
+        const val androidDriver = "com.squareup.sqldelight:android-driver:${ Version.sqlDelight }"
+        const val coroutines = "com.squareup.sqldelight:coroutines-extensions-jvm:${ Version.sqlDelight }"
     }
 
     object Ktor {

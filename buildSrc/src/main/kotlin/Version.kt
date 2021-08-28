@@ -12,7 +12,7 @@ object Version {
     const val hiltNavigation = "1.0.0-alpha03"
     const val hiltNavigationFragment = "1.0.0"
 
-    const val room = "2.4.0-alpha03"
+    const val sqlDelight = "1.5.0"
 
     const val ktor = "1.6.2"
 
