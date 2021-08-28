@@ -12,17 +12,20 @@ import dev.dprice.crypto.goldennuggets.blockchain.Database
 import dev.dprice.crypto.goldennuggets.blockchain.database.BlockChainItem
 import dev.dprice.crypto.goldennuggets.blockchain.database.BlockColumnAdapter
 import dev.dprice.crypto.goldennuggets.blockchain.database.TransactionColumnAdapter
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class BlockChainDatabaseModule {
 
     @Provides
+    @Singleton
     fun provideDatabaseDriver(@ApplicationContext context: Context) : SqlDriver {
         return AndroidSqliteDriver(Database.Schema, context, "BlockChainDatabase.db")
     }
 
     @Provides
+    @Singleton
     fun provideDatabase(driver: SqlDriver) : Database = Database(
         driver,
         BlockChainItem.Adapter(
@@ -32,5 +35,6 @@ class BlockChainDatabaseModule {
     )
 
     @Provides
+    @Singleton
     fun provideDatabaseQueries(database: Database) = database.blockChainQueries
 }

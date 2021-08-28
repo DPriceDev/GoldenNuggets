@@ -8,7 +8,10 @@ import dev.dprice.crypto.goldennuggets.blockchain.model.*
 import dev.dprice.crypto.goldennuggets.blockchain.usecase.GetBlockChainUseCase
 import dev.dprice.crypto.goldennuggets.blockchain.usecase.SaveBlockUseCase
 import dev.dprice.crypto.goldennuggets.blockchain.usecase.UpdateBlockChainUseCase
+import dev.dprice.crypto.goldennuggets.core.di.Computation
+import dev.dprice.crypto.goldennuggets.core.di.IO
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.datetime.Clock
@@ -26,31 +29,28 @@ class BlockChainMinerImpl @Inject constructor(
     private val blockHasher: BlockHasher,
     private val getBlockChainUseCase: GetBlockChainUseCase,
     private val saveBlockUseCase: SaveBlockUseCase,
-    private val updateBlockChainUseCase: UpdateBlockChainUseCase
+    private val updateBlockChainUseCase: UpdateBlockChainUseCase,
+    @Computation private val computationDispatcher: CoroutineDispatcher
 ) : BlockChainMiner {
 
-    private val exceptionHandler = CoroutineExceptionHandler { context, ex ->
-        Log.e("Davids Log", "Cancelled!")
-    }
+    private var miningJob: Job? = null
 
-    override fun mine() : Job {
-        val address = "123123"
-
-        return CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-
-            getBlockChainUseCase.getBlockChain().collect { blockChain ->
-
+    override fun mine() : Job = CoroutineScope(computationDispatcher).launch {
+        getBlockChainUseCase.getBlockChain().collect { blockChain ->
+            miningJob?.cancel()
+            miningJob = CoroutineScope(computationDispatcher).launch {
                 // create new transaction to me
-                val transaction = createMiningTransaction(address)
+                val transaction = createMiningTransaction(ADDRESS)
 
                 // create new block
                 val newBlock = createMiningBlock(blockChain, transaction)
 
                 // save current block being mined
+                // todo: is needed?
                 saveBlockUseCase.saveBlock(newBlock)
 
                 // mine block
-                val minedBlock = blockMiner.mineBlock(newBlock, 2)
+                val minedBlock = blockMiner.mineBlock(newBlock, MINING_DIFFICULTY)
 
                 val newBlockChain = blockChain.copy(
                     blocks = blockChain.blocks.plus(minedBlock)
@@ -58,9 +58,9 @@ class BlockChainMinerImpl @Inject constructor(
 
                 // update blockchain with new block and chain
                 Log.e("Davids Log", "mined blockchain: $newBlockChain")
+
                 updateBlockChainUseCase.update(newBlockChain)
             }
-            ensureActive()
         }
     }
 
@@ -86,5 +86,12 @@ class BlockChainMinerImpl @Inject constructor(
             0,
             previousHash
         )
+    }
+
+    companion object {
+        // todo: Make variable against time to mine a block i.e. every 10 seconds?
+        private const val MINING_DIFFICULTY = 3
+        // todo: Make generatable - save in datastore?
+        private const val ADDRESS = "123123"
     }
 }

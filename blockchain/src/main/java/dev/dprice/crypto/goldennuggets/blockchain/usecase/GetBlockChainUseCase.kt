@@ -1,10 +1,9 @@
 package dev.dprice.crypto.goldennuggets.blockchain.usecase
 
-import dev.dprice.crypto.goldennuggets.blockchain.domain.BlockChainRepository
+import dev.dprice.crypto.goldennuggets.blockchain.repository.BlockChainRepository
 import dev.dprice.crypto.goldennuggets.blockchain.model.Block
 import dev.dprice.crypto.goldennuggets.blockchain.model.BlockChain
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Clock
 import javax.inject.Inject

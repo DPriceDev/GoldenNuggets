@@ -1,4 +1,4 @@
-package dev.dprice.crypto.goldennuggets.blockchain.domain
+package dev.dprice.crypto.goldennuggets.blockchain.repository
 
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList

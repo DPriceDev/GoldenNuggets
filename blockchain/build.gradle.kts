@@ -73,6 +73,13 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+
+    /* Kotlin */
+    implementation(Dependencies.Kotlin.datetime)
+    implementation(Dependencies.Kotlin.jsonSerialization)
+
+    /* Android */
     implementation(Dependencies.Android.coreKtx)
     implementation(Dependencies.Android.appCompat)
 
@@ -89,12 +96,8 @@ dependencies {
     implementation(Dependencies.Ktor.Server.logging)
 
     /* SQL Delight */
-    implementation("com.squareup.sqldelight:android-driver:1.5.0")
-    implementation("com.squareup.sqldelight:coroutines-extensions-jvm:1.5.0")
-
-    /* Kotlin */
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+    implementation(Dependencies.SqlDelight.androidDriver)
+    implementation(Dependencies.SqlDelight.coroutines)
 
     testImplementation(Dependencies.Junit.api)
     testImplementation(Dependencies.Junit.engine)

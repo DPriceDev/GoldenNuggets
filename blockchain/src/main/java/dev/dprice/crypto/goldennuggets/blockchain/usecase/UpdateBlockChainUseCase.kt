@@ -1,6 +1,6 @@
 package dev.dprice.crypto.goldennuggets.blockchain.usecase
 
-import dev.dprice.crypto.goldennuggets.blockchain.domain.BlockChainRepository
+import dev.dprice.crypto.goldennuggets.blockchain.repository.BlockChainRepository
 import dev.dprice.crypto.goldennuggets.blockchain.model.BlockChain
 import javax.inject.Inject
 

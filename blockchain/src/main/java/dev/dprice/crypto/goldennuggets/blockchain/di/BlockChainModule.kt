@@ -9,6 +9,8 @@ import dev.dprice.crypto.goldennuggets.blockchain.BlockChainServerImpl
 import dev.dprice.crypto.goldennuggets.blockchain.BlockChainMiner
 import dev.dprice.crypto.goldennuggets.blockchain.BlockChainMinerImpl
 import dev.dprice.crypto.goldennuggets.blockchain.domain.*
+import dev.dprice.crypto.goldennuggets.blockchain.repository.BlockChainRepository
+import dev.dprice.crypto.goldennuggets.blockchain.repository.BlockChainRepositoryImpl
 import dev.dprice.crypto.goldennuggets.blockchain.usecase.*
 
 @Module
